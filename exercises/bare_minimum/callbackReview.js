@@ -24,10 +24,10 @@ var pluckFirstLineFromFile = function (filePath, callback) {
   rs.on('close', () => {
     line = line.slice(0, lineEndIndex);
     callback(null, line);
-  })
+  });
   rs.on('error', (err) => {
     callback(err);
-  })
+  });
 };
 // This function should retrieve the status code of a GET request to `url`
 var getStatusCode = function (url) {
