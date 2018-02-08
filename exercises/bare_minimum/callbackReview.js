@@ -18,11 +18,11 @@ var pluckFirstLineFromFile = function (filePath, callback) {
     if (lineEndIndex !== -1) {
       rs.close();
     } else {
-      position = chunk.length;
+      position += chunk.length;
     }
   });
   rs.on('close', () => {
-    line = line.slice(0, lineEndIndex);
+    line = line.slice(0, position + lineEndIndex);
     callback(null, line);
   });
   rs.on('error', (err) => {
@@ -30,8 +30,15 @@ var pluckFirstLineFromFile = function (filePath, callback) {
   });
 };
 // This function should retrieve the status code of a GET request to `url`
-var getStatusCode = function (url) {
+var getStatusCode = function (url, callback) {
   // TODO
+  request(url, (err, response, body) => {
+    if (response !== undefined) {
+      callback(err, response.statusCode);
+    } else {
+      callback(err, null);
+    }
+  });
 };
 
 // Export these functions so we can test them and reuse them in later exercises
