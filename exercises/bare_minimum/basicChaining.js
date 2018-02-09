@@ -22,7 +22,7 @@ var fetchProfileAndWriteToFile = function(readFilePath, writeFilePath) {
     })
     .then(function(userObj) {
       return fs.writeFileAsync(writeFilePath, JSON.stringify(userObj));
-    })
+    });
 };
 
 // Export these functions so we can test them
